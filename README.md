@@ -12,23 +12,23 @@ Real screenshots of the repository's committed build, running locally. No mockup
 
 ### 3D landing page
 
-![PROVIQRA landing page with interactive intent network](docs/screenshots/proviqra-landing.png)
+![PROVIQRA landing page with interactive intent network](docs/screenshots/2-proviqra-landing.png)
 
 ### Matching dashboard
 
-![PROVIQRA dark matching dashboard with seeded demo data](docs/screenshots/proviqra-matching.png)
+![PROVIQRA dark matching dashboard with seeded demo data](docs/screenshots/3-proviqra-matching.png)
 
 ### Search by professional intent
 
-![Keyword-based search with extracted criteria and ranked sample profiles](docs/screenshots/proviqra-search.png)
+![Keyword-based search with extracted criteria and ranked sample profiles](docs/screenshots/4-proviqra-search.png)
 
 ### Sample profile
 
-![Fictional demo profile showing skills, proof-of-work links and intent](docs/screenshots/proviqra-profile.png)
+![Fictional demo profile showing skills, proof-of-work links and intent](docs/screenshots/5-proviqra-profile.png)
 
 ### Light mode
 
-![PROVIQRA matching dashboard in light mode](docs/screenshots/proviqra-light.png)
+![PROVIQRA matching dashboard in light mode](docs/screenshots/6-proviqra-light.png)
 
 ## What the prototype includes
 
