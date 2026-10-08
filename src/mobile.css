@@ -84,3 +84,12 @@
   .lp-cursor-dot, .lp-cursor-ring { display: none !important; }
   body.lp-has-cursor { cursor: auto !important; }
 }
+@media (max-width: 767px) {
+  .app-container .main-content > div > .card > div:first-child:has(> div > img) { flex-wrap: wrap; gap: 16px; }
+  .app-container .main-content > div > .card > div:first-child > div:has(> img) { width: 100%; min-width: 0; }
+  .app-container .main-content > div > .card > div:first-child > div > div { min-width: 0; }
+  .app-container .main-content > div > .card > div:first-child > div > div > div:first-child { flex-wrap: wrap; }
+  .app-container .main-content > div > .card > div:first-child h2 { overflow-wrap: normal; }
+  .app-container .main-content > div:has(.chat-container-split) > div:first-child { flex-wrap: wrap; gap: 14px; }
+  .app-container .main-content > div:has(.chat-container-split) > div:first-child > div { width: 100%; }
+}
