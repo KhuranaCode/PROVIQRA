@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proviqra — Professional Matchmaking & Intent Network</title>
+    <meta name="description" content="A professional intent-matching network matching founders, talent, recruiters, and investors with complementary professional goals through 100-point synergy scoring." />
+    <meta name="keywords" content="professional networking, co-founder search, startup matchmaking, intent network, engineering sprints, tech talent" />
+    <meta name="theme-color" content="#030712" />
+    <meta property="og:title" content="Proviqra — Professional Matchmaking & Intent Network" />
+    <meta property="og:description" content="Bypass follower vanity. Connect founders, builders, and investors based on verified proof of work and complementary intent." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://proviqra.network" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Proviqra — Intent Matching Network" />
+    <meta name="twitter:description" content="Proof over pedigree. Intent over vanity." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <script>
+      (function() {
+        try {
+          var t = localStorage.getItem('proviqra_theme');
+          if (!t) {
+            var s = localStorage.getItem('proviqra_app_state_v1');
+            if (s) {
+              var parsed = JSON.parse(s);
+              if (parsed && parsed.theme) t = parsed.theme;
+            }
+          }
+          document.documentElement.setAttribute('data-theme', t || 'dark');
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
+    <link rel="stylesheet" href="/src/mobile.css" />
+    <script type="module" src="/src/main.jsx"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
