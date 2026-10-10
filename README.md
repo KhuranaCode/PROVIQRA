@@ -6,6 +6,10 @@ Built with **React 18, JavaScript, CSS and Vite**, with **Three.js, React Three 
 
 > **Prototype status:** The app uses seeded sample profiles, opportunities, conversations and browser-local state. Verification badges, professional histories, match scores and dashboard metrics are demo data. It is not a live multi-user service, and the fictional "Aaditya Sharma" profile is not Aaditya Khurana's biography.
 
+## Architecture
+
+![PROVIQRA system architecture](docs/1-proviqra-architecture.png)
+
 ## Screenshots
 
 Real screenshots of the repository's committed build, running locally. No mockups or fabricated app screens.
