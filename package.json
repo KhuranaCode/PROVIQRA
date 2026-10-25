@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite --host 0.0.0.0 --port 5173",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "node test_core.js && node test_engines.js"
   },
   "dependencies": {
     "@react-three/drei": "^9.117.3",

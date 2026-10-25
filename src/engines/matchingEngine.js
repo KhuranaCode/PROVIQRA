@@ -33,8 +33,13 @@ export function calculateMatchScore(currentUser, candidateUser) {
   const candidateIntent = candidateUser.intent || {};
 
   // 1. Skills Compatibility (Max 35 points)
-  const skillsNeeded = (myIntent.skillsNeeded || []).map(s => s.toLowerCase());
-  const candidateSkills = (candidateUser.skills || []).map(s => s.name.toLowerCase());
+  const skillsNeeded = (myIntent.skillsNeeded || [])
+    .map(s => String(s || '').toLowerCase().trim())
+    .filter(name => name.length > 0);
+  // Ignore empty/missing skill names: '' would match every query via includes('').
+  const candidateSkills = (candidateUser.skills || [])
+    .map(s => (s && s.name ? String(s.name).toLowerCase().trim() : ''))
+    .filter(name => name.length > 0);
   
   if (skillsNeeded.length > 0) {
     const matchedSkills = skillsNeeded.filter(skill => 

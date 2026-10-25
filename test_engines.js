@@ -73,4 +73,42 @@ INITIAL_OPPORTUNITIES.forEach(opp => {
 });
 console.log('✅ PASS: All opportunity types correctly mapped to database schema!\n');
 
+// 5. Matching Engine Robustness: malformed skill data must not crash or inflate scores
+console.log('5️⃣ TESTING MATCHING ENGINE ROBUSTNESS (malformed skill data):');
+const robustSeeker = {
+  id: 'u_seeker',
+  intent: { skillsNeeded: ['flutter', 'python', 'kubernetes'], type: 'Hire', commitment: 'Full-time', industry: 'fintech' },
+  remotePreference: 'Remote only'
+};
+const emptyNameCandidate = {
+  id: 'u_empty',
+  skills: [{ name: '' }],
+  intent: { type: 'Job', commitment: 'Full-time', industry: 'fintech' },
+  remotePreference: 'Remote only', experienceYears: 5, proofOfWork: []
+};
+const missingNameCandidate = {
+  id: 'u_missing',
+  skills: [{ level: 'expert' }],
+  intent: { type: 'Job' }
+};
+const emptyScore = calculateMatchScore(robustSeeker, emptyNameCandidate);
+if (emptyScore.breakdown.skills === 0) {
+  console.log('✅ PASS: Empty skill names no longer match every query via includes(\'\')! (skills 0/35)');
+} else {
+  console.error(`❌ FAIL: Empty skill name inflated score to ${emptyScore.breakdown.skills}/35`);
+  process.exit(1);
+}
+let missingOk = false;
+try {
+  missingOk = calculateMatchScore(robustSeeker, missingNameCandidate).breakdown.skills === 0;
+} catch (e) {
+  missingOk = false;
+}
+if (missingOk) {
+  console.log('✅ PASS: Skill entries missing a name field are ignored instead of crashing!\n');
+} else {
+  console.error('❌ FAIL: Missing skill name crashed or scored nonzero');
+  process.exit(1);
+}
+
 console.log('✨ ALL BLUEPRINT ENGINE CHECKS PASSED SUCCESSFULLY!');
