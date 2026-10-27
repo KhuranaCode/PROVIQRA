@@ -112,3 +112,55 @@ if (missingOk) {
 }
 
 console.log('✨ ALL BLUEPRINT ENGINE CHECKS PASSED SUCCESSFULLY!');
+
+// 4. Ask Engine Robustness (word-boundary parsing, no-criteria honesty, field guards)
+console.log('4️⃣ TESTING ASK ENGINE ROBUSTNESS:');
+let robustnessFailures = 0;
+const check = (label, cond) => {
+  if (cond) { console.log(`✅ PASS: ${label}`); }
+  else { console.error(`❌ FAIL: ${label}`); robustnessFailures++; }
+};
+
+const r1 = parseNaturalLanguageQuery("looking for someone to discuss product strategy with us");
+check('"discuss ... with us" does not detect US location', r1.criteria.location === null);
+
+const r2 = parseNaturalLanguageQuery("find people available for coffee chats about startups");
+check('"available" does not detect AI industry or AI skill', r2.criteria.industry !== 'AI / ML' && !r2.criteria.skills.includes('ai'));
+
+const r3 = parseNaturalLanguageQuery("need a good designer");
+check('"good" does not detect Go skill', !r3.criteria.skills.includes('go'));
+
+const r4 = parseNaturalLanguageQuery("asdf qwer zxcv");
+check('gibberish query sets noCriteriaDetected', r4.noCriteriaDetected === true);
+
+const r5 = parseNaturalLanguageQuery("find a developer in the US");
+check('"the US" still detects US location', r5.criteria.location === 'us');
+
+const r6 = parseNaturalLanguageQuery("Flutter developer in India, early-stage fintech startup, part-time");
+check('real query still parses fully', r6.criteria.role === 'Developer' && r6.criteria.location === 'india' && r6.criteria.commitment === 'Part-time' && r6.criteria.industry === 'Fintech' && r6.noCriteriaDetected === false);
+
+const sparseUser = { id: 'user_sparse', name: 'Sparse', skills: [] };
+try {
+  const res = executeNaturalLanguageSearch("find a developer", aaditya, [...INITIAL_USERS, sparseUser]);
+  check('candidate with missing role/location does not crash', res.results.some(r => r.candidate.id === 'user_sparse'));
+  const sparseResult = res.results.find(r => r.candidate.id === 'user_sparse');
+  check('no-reason explanation has honest fallback', sparseResult.explanation.includes('no specific criteria matched'));
+} catch (e) {
+  check('candidate with missing role/location does not crash', false);
+}
+
+if (robustnessFailures > 0) {
+  console.error(`\n❌ ${robustnessFailures} robustness test(s) failed`);
+  process.exit(1);
+}
+console.log('\n✅ ALL ASK ENGINE ROBUSTNESS TESTS PASSED');
+
+// 5. Fallback wording honesty (noCriteriaDetected phrasing)
+console.log('5️⃣ TESTING FALLBACK WORDING HONESTY:');
+const gibberishRes = executeNaturalLanguageSearch("asdf qwer zxcv", aaditya, INITIAL_USERS);
+const gibExp = gibberishRes.results[0].explanation;
+check('gibberish explanation says general compatibility, not prompt match', gibExp.includes('general compatibility') && !gibExp.includes('Match for your prompt'));
+const realRes = executeNaturalLanguageSearch("Flutter developer in India", aaditya, INITIAL_USERS);
+check('real query keeps prompt-match wording', realRes.results[0].explanation.includes('Match for your prompt'));
+if (robustnessFailures > 0) { console.error(`\n❌ ${robustnessFailures} test(s) failed`); process.exit(1); }
+console.log('\n✅ ALL WORDING TESTS PASSED');
