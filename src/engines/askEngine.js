@@ -5,7 +5,23 @@ import { calculateMatchScore } from './matchingEngine.js';
  * Parses freeform natural language query e.g.:
  * "Find me a Flutter developer in India who wants to join an early-stage fintech startup part-time"
  * Extracts structured criteria -> applies hard filters -> ranks candidates -> generates structured explanation.
+ *
+ * Robustness notes:
+ * - Keyword detection uses word-boundary matching so short tokens like "ai", "go" or "us"
+ *   do not fire inside unrelated words ("available", "good", "discuss").
+ * - Ambiguous "us" (the country) only matches in place-like phrasing ("the US", "USA", "United States", "America").
+ * - When no criteria can be extracted, parsed.noCriteriaDetected is set so the UI can be honest
+ *   instead of presenting generic rankings as if the query was understood.
  */
+
+function matchesKeyword(text, keyword) {
+  const escaped = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp(`\\b${escaped}\\b`, 'i').test(text);
+}
+
+function findFirst(text, keywords) {
+  return keywords.find((kw) => matchesKeyword(text, kw)) || null;
+}
 
 export function parseNaturalLanguageQuery(queryText) {
   const text = (queryText || '').toLowerCase();
@@ -30,13 +46,13 @@ export function parseNaturalLanguageQuery(queryText) {
 
   // Known skills
   const skillKeywords = [
-    'flutter', 'riverpod', 'node.js', 'node', 'python', 'postgresql', 
-    'fintech', 'ai', 'system design', 'product strategy', 'figma', 
+    'flutter', 'riverpod', 'node.js', 'node', 'python', 'postgresql',
+    'fintech', 'ai', 'system design', 'product strategy', 'figma',
     'ui/ux design', 'go', 'kubernetes', 'cloud'
   ];
 
-  // Locations
-  const locationKeywords = ['india', 'bengaluru', 'mumbai', 'san francisco', 'berlin', 'singapore', 'us', 'remote'];
+  // Locations ("us" handled separately: the bare pronoun is too ambiguous)
+  const locationKeywords = ['india', 'bengaluru', 'mumbai', 'san francisco', 'berlin', 'singapore', 'remote'];
 
   // Commitments
   const commitmentKeywords = {
@@ -52,51 +68,63 @@ export function parseNaturalLanguageQuery(queryText) {
   // Extract detected attributes
   let extractedRole = null;
   for (const [key, val] of Object.entries(roleKeywords)) {
-    if (text.includes(key)) {
+    if (matchesKeyword(text, key)) {
       extractedRole = val;
       break;
     }
   }
 
-  const extractedSkills = skillKeywords.filter(skill => text.includes(skill));
+  const extractedSkills = skillKeywords.filter((skill) => matchesKeyword(text, skill));
 
-  let extractedLocation = null;
-  for (const loc of locationKeywords) {
-    if (text.includes(loc)) {
-      extractedLocation = loc;
-      break;
-    }
+  let extractedLocation = findFirst(text, locationKeywords);
+  if (!extractedLocation && /\b(the us|usa|united states|america)\b/i.test(text)) {
+    extractedLocation = 'us';
   }
 
   let extractedCommitment = null;
   for (const [key, val] of Object.entries(commitmentKeywords)) {
-    if (text.includes(key)) {
+    if (matchesKeyword(text, key)) {
       extractedCommitment = val;
       break;
     }
   }
 
   let extractedIndustry = null;
-  if (text.includes('fintech') || text.includes('finance') || text.includes('payments')) {
+  if (['fintech', 'finance', 'payments'].some((kw) => matchesKeyword(text, kw))) {
     extractedIndustry = 'Fintech';
-  } else if (text.includes('ai') || text.includes('ml')) {
+  } else if (['ai', 'ml', 'machine learning'].some((kw) => matchesKeyword(text, kw))) {
     extractedIndustry = 'AI / ML';
-  } else if (text.includes('saas') || text.includes('cloud')) {
+  } else if (['saas', 'cloud'].some((kw) => matchesKeyword(text, kw))) {
     extractedIndustry = 'Cloud / SaaS';
   }
 
-  const isCoFounderIntent = text.includes('co-founder') || text.includes('cofounder') || text.includes('early-stage') || text.includes('startup');
+  const isCoFounderIntent =
+    matchesKeyword(text, 'co-founder') ||
+    matchesKeyword(text, 'cofounder') ||
+    matchesKeyword(text, 'early-stage') ||
+    matchesKeyword(text, 'startup');
+
+  const criteria = {
+    role: extractedRole,
+    skills: extractedSkills,
+    location: extractedLocation,
+    commitment: extractedCommitment,
+    industry: extractedIndustry,
+    isCoFounderIntent
+  };
+
+  const noCriteriaDetected =
+    !extractedRole &&
+    extractedSkills.length === 0 &&
+    !extractedLocation &&
+    !extractedCommitment &&
+    !extractedIndustry &&
+    !isCoFounderIntent;
 
   return {
     originalQuery: queryText,
-    criteria: {
-      role: extractedRole,
-      skills: extractedSkills,
-      location: extractedLocation,
-      commitment: extractedCommitment,
-      industry: extractedIndustry,
-      isCoFounderIntent
-    }
+    criteria,
+    noCriteriaDetected
   };
 }
 
@@ -104,16 +132,17 @@ export function executeNaturalLanguageSearch(queryText, currentUser, allUsers) {
   const parsed = parseNaturalLanguageQuery(queryText);
   const { criteria } = parsed;
 
-  const validCandidates = (allUsers || []).filter(u => u.id !== currentUser.id);
+  const validCandidates = (allUsers || []).filter((u) => u && u.id !== currentUser?.id);
 
-  const results = validCandidates.map(candidate => {
+  const results = validCandidates.map((candidate) => {
     // Check match against structured query
     let queryPoints = 0;
     const matchedCriteria = [];
 
     // Role check
-    if (criteria.role) {
-      if (candidate.role.toLowerCase().includes(criteria.role.toLowerCase())) {
+    const candidateRole = (candidate.role || '').toLowerCase();
+    if (criteria.role && candidateRole) {
+      if (candidateRole.includes(criteria.role.toLowerCase())) {
         queryPoints += 30;
         matchedCriteria.push(`Role: ${candidate.role}`);
       }
@@ -121,13 +150,13 @@ export function executeNaturalLanguageSearch(queryText, currentUser, allUsers) {
 
     // Skills check
     if (criteria.skills.length > 0) {
-      const candidateSkillNames = (candidate.skills || []).map(s => s.name.toLowerCase());
-      const hits = criteria.skills.filter(reqSkill => 
-        candidateSkillNames.some(cs => cs.includes(reqSkill) || reqSkill.includes(cs))
+      const candidateSkillNames = (candidate.skills || []).map((s) => (s.name || '').toLowerCase());
+      const hits = criteria.skills.filter((reqSkill) =>
+        candidateSkillNames.some((cs) => cs.includes(reqSkill) || reqSkill.includes(cs))
       );
       if (hits.length > 0) {
         queryPoints += Math.min(35, hits.length * 15);
-        matchedCriteria.push(`Skills: ${hits.map(s => s.toUpperCase()).join(', ')}`);
+        matchedCriteria.push(`Skills: ${hits.map((s) => s.toUpperCase()).join(', ')}`);
       }
     }
 
@@ -186,9 +215,9 @@ function generateNaturalLanguageExplanation(candidate, parsed, score) {
   const reasons = [];
 
   if (criteria.skills.length > 0) {
-    const matched = (candidate.skills || []).filter(s => 
-      criteria.skills.some(req => s.name.toLowerCase().includes(req))
-    ).map(s => s.name);
+    const matched = (candidate.skills || []).filter((s) =>
+      criteria.skills.some((req) => (s.name || '').toLowerCase().includes(req))
+    ).map((s) => s.name);
     if (matched.length > 0) {
       reasons.push(`verified expertise in ${matched.join(' & ')}`);
     }
@@ -202,5 +231,16 @@ function generateNaturalLanguageExplanation(candidate, parsed, score) {
     reasons.push(`located in ${candidate.location}`);
   }
 
-  return `${score}% Match for your prompt: Candidate has ${reasons.join(', ')}.`;
+  if (parsed.noCriteriaDetected) {
+    if (reasons.length === 0) {
+      return `${score}% general compatibility: ranked by overall profile only (query not understood).`;
+    }
+    return `${score}% general compatibility: ${reasons.join('; ')}.`;
+  }
+
+  if (reasons.length === 0) {
+    return `${score}% Match for your prompt: no specific criteria matched; ranked by general profile compatibility.`;
+  }
+
+  return `${score}% Match for your prompt: ${reasons.join('; ')}.`;
 }
