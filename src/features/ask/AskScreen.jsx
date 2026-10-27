@@ -27,7 +27,7 @@ export default function AskScreen({ currentUser, allUsers, onConnect, onViewProf
   };
 
   const { parsed, results = [] } = searchResults || {};
-  const { criteria = {} } = parsed || {};
+  const { criteria = {}, noCriteriaDetected = false } = parsed || {};
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
@@ -100,6 +100,11 @@ export default function AskScreen({ currentUser, allUsers, onConnect, onViewProf
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.82rem', fontWeight: '700', color: 'var(--text-primary)' }}>
             <span>🧠 Extracted Structured Constraints:</span>
           </div>
+          {noCriteriaDetected && (
+            <span className="badge badge-warn" style={{ alignSelf: 'flex-start' }}>
+              Could not detect specific criteria in that query - ranked by general compatibility. Try naming a role, skill or location.
+            </span>
+          )}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
             {criteria.role && (
               <span className="badge badge-match">Target Role: {criteria.role}</span>
@@ -149,7 +154,7 @@ export default function AskScreen({ currentUser, allUsers, onConnect, onViewProf
                   </div>
                 </div>
 
-                <span className="badge badge-match">{score}% FIT</span>
+                <span className="badge badge-match">{noCriteriaDetected ? `${score}% GENERAL` : `${score}% FIT`}</span>
               </div>
 
               <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
