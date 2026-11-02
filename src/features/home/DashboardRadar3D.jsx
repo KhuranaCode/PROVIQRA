@@ -1,9 +1,16 @@
 import React, { useRef, useState, useMemo } from 'react';
 import * as THREE from 'three';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Float, Html, Lightformer, Environment } from '@react-three/drei';
 
 const damp = THREE.MathUtils.damp;
+
+/** Scales the radar scene down on narrow canvases so outer node pills stay inside the container. */
+function ResponsiveRadarScale({ children }) {
+  const size = useThree((state) => state.size);
+  const scale = Math.min(1, size.width / 560);
+  return <group scale={[scale, scale, scale]}>{children}</group>;
+}
 const lerp = THREE.MathUtils.lerp;
 
 const ROLE_PALETTE = {
@@ -250,12 +257,14 @@ export default function DashboardRadar3D({ currentUser, topMatches, selectedId, 
           <ambientLight intensity={0.8} />
           <directionalLight position={[4, 6, 5]} intensity={1.2} color="#FFFFFF" />
           <directionalLight position={[-4, -2, -3]} intensity={0.4} color="#C7D2FE" />
-          <RadarScene
-            currentUser={currentUser}
-            topMatches={topMatches}
-            selectedId={selectedId}
-            onSelectCandidate={onSelectCandidate}
-          />
+          <ResponsiveRadarScale>
+            <RadarScene
+              currentUser={currentUser}
+              topMatches={topMatches}
+              selectedId={selectedId}
+              onSelectCandidate={onSelectCandidate}
+            />
+          </ResponsiveRadarScale>
         </Canvas>
       </CanvasErrorBoundary>
       <div className="dash3d-hint">
