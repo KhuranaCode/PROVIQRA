@@ -268,7 +268,7 @@ export default function DashboardRadar3D({ currentUser, topMatches, selectedId, 
         </Canvas>
       </CanvasErrorBoundary>
       <div className="dash3d-hint">
-        <span>✦ Interactive 3D Intent Radar — click a node to inspect</span>
+        <span>✦ Interactive 3D Intent Radar — tap a node to inspect</span>
       </div>
     </div>
   );
