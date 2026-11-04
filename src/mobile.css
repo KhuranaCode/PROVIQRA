@@ -64,7 +64,7 @@
   .app-container .nav-tab { min-width: 0; padding: 10px 4px; font-size: 0.63rem; gap: 5px; border-radius: 16px; }
   .app-container .dash-hero-3d { padding: 20px; gap: 16px; border-radius: 22px; }
   .app-container .dash-hero-title { font-size: 1.8rem; }
-  .app-container .dash3d-container { height: 220px; }
+  .app-container .dash3d-container { height: 280px; }
   .app-container .dash-stats-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .app-container .grid-2, .app-container .dash-match-grid { grid-template-columns: minmax(0, 1fr); }
   .app-container .card { min-width: 0; overflow-wrap: anywhere; }
