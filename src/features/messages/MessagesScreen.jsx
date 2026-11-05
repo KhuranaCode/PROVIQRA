@@ -32,12 +32,6 @@ export default function MessagesScreen({
   const [showMobileChatPane, setShowMobileChatPane] = useState(false);
   const msgListRef = useRef(null);
 
-  // Keep chat pinned to the latest message when opening a conversation or sending
-  useEffect(() => {
-    const el = msgListRef.current;
-    if (el) el.scrollTop = el.scrollHeight;
-  }, [activeConv?.id, activeConv?.messages.length]);
-
   // Connections where current user is receiver and status is pending
   const incomingRequests = connections.filter(
     c => c.receiverId === currentUser.id && c.status === 'pending'
@@ -57,6 +51,12 @@ export default function MessagesScreen({
 
   const activePartnerId = activeConv?.participants.find(id => id !== currentUser.id);
   const activePartner = allUsers.find(u => u.id === activePartnerId);
+
+  // Keep chat pinned to the latest message when opening a conversation or sending
+  useEffect(() => {
+    const el = msgListRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
+  }, [activeConv?.id, activeConv?.messages.length]);
 
   const handleSend = (e) => {
     e.preventDefault();
