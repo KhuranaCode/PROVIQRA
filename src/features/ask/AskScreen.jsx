@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { executeNaturalLanguageSearch } from '../../engines/askEngine.js';
 
+// Tier match-score badges so fit quality is scannable at a glance:
+// strong fits stay green, middling fits amber, weak fits red.
+const scoreBadgeClass = (score) =>
+  score >= 80 ? 'badge badge-match' : score >= 50 ? 'badge badge-warn' : 'badge badge-danger';
+
 const EXAMPLE_PROMPTS = [
   "Find me a Flutter developer in India who wants to join an early-stage fintech startup part-time",
   "Looking for an angel investor writing checks for fintech startups",
@@ -154,7 +159,7 @@ export default function AskScreen({ currentUser, allUsers, onConnect, onViewProf
                   </div>
                 </div>
 
-                <span className="badge badge-match">{noCriteriaDetected ? `${score}% GENERAL` : `${score}% FIT`}</span>
+                <span className={scoreBadgeClass(score)}>{noCriteriaDetected ? `${score}% GENERAL` : `${score}% FIT`}</span>
               </div>
 
               <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
