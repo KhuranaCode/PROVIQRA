@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { cleanText } from '../../core/state.js';
 
 
@@ -30,6 +30,13 @@ export default function MessagesScreen({
   const [activeSubTab, setActiveSubTab] = useState('chats'); // 'chats' or 'requests'
   const [newMessageText, setNewMessageText] = useState('');
   const [showMobileChatPane, setShowMobileChatPane] = useState(false);
+  const msgListRef = useRef(null);
+
+  // Keep chat pinned to the latest message when opening a conversation or sending
+  useEffect(() => {
+    const el = msgListRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
+  }, [activeConv?.id, activeConv?.messages.length]);
 
   // Connections where current user is receiver and status is pending
   const incomingRequests = connections.filter(
@@ -322,7 +329,7 @@ export default function MessagesScreen({
               </div>
 
               {/* Message List */}
-              <div style={{ flex: 1, padding: '16px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <div ref={msgListRef} style={{ flex: 1, padding: '16px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 <div style={{ textAlign: 'center', margin: '8px 0', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
                   Mutual connection confirmed • Private direct chat
                 </div>
@@ -369,7 +376,12 @@ export default function MessagesScreen({
                   onChange={(e) => setNewMessageText(e.target.value)}
                   style={{ flex: 1 }}
                 />
-                <button type="submit" className="btn btn-primary" style={{ padding: '0 20px' }}>
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  disabled={!newMessageText.trim()}
+                  style={{ padding: '0 20px', opacity: newMessageText.trim() ? 1 : 0.55, cursor: newMessageText.trim() ? 'pointer' : 'not-allowed' }}
+                >
                   Send
                 </button>
               </form>
