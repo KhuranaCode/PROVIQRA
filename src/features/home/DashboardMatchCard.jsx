@@ -9,6 +9,27 @@ export default function DashboardMatchCard({
   onViewProfile,
 }) {
   const { candidate, score, reasons = [], gaps = [], breakdown } = match;
+
+  // Tier the score ring so match quality is scannable at a glance
+  // (green = strong, amber = middling, red = weak) in both themes.
+  const scoreRingStyle =
+    score >= 80
+      ? {
+          background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.14), rgba(5, 150, 105, 0.10))',
+          border: '1px solid rgba(16, 185, 129, 0.45)',
+          color: '#10B981',
+        }
+      : score >= 50
+        ? {
+            background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.14), rgba(217, 119, 6, 0.10))',
+            border: '1px solid rgba(245, 158, 11, 0.45)',
+            color: '#D97706',
+          }
+        : {
+            background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(220, 38, 38, 0.10))',
+            border: '1px solid rgba(239, 68, 68, 0.45)',
+            color: '#EF4444',
+          };
   const [showBreakdown, setShowBreakdown] = useState(false);
   const cardRef = useRef(null);
 
@@ -58,7 +79,7 @@ export default function DashboardMatchCard({
           </div>
 
           <div className="dash-score-badge">
-            <div className="dash-score-ring">
+            <div className="dash-score-ring" style={scoreRingStyle}>
               <b>{score}</b>
               <small>%</small>
             </div>
