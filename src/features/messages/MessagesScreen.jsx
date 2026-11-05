@@ -1,6 +1,19 @@
 import React, { useState } from 'react';
 import { cleanText } from '../../core/state.js';
 
+
+// Chat timestamp: time for today, "Yesterday", or short date for older
+function formatMsgTime(iso) {
+  const d = new Date(iso);
+  const now = new Date();
+  const time = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const startOfDay = (x) => new Date(x.getFullYear(), x.getMonth(), x.getDate()).getTime();
+  const dayDiff = Math.round((startOfDay(now) - startOfDay(d)) / 86400000);
+  if (dayDiff === 0) return time;
+  if (dayDiff === 1) return `Yesterday, ${time}`;
+  return `${d.toLocaleDateString([], { month: 'short', day: 'numeric' })}, ${time}`;
+}
+
 export default function MessagesScreen({
   currentUser,
   allUsers,
@@ -240,8 +253,15 @@ export default function MessagesScreen({
                       style={{ width: '38px', height: '38px', borderRadius: '50%', objectFit: 'cover' }}
                     />
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontWeight: '700', fontSize: '0.88rem', color: 'var(--text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                        {partner.name}
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '8px' }}>
+                        <span style={{ fontWeight: '700', fontSize: '0.88rem', color: 'var(--text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                          {partner.name}
+                        </span>
+                        {lastMsg && (
+                          <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)', whiteSpace: 'nowrap', flexShrink: 0 }}>
+                            {formatMsgTime(lastMsg.createdAt)}
+                          </span>
+                        )}
                       </div>
                       <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                         {lastMsg ? lastMsg.text : 'Conversation unlocked'}
@@ -332,7 +352,7 @@ export default function MessagesScreen({
                         {msg.text}
                       </div>
                       <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '3px' }}>
-                        {new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} {isMe ? '✓' : ''}
+                        {formatMsgTime(msg.createdAt)} {isMe ? '✓' : ''}
                       </div>
                     </div>
                   );
