@@ -135,7 +135,7 @@ function RadarScene({ currentUser, topMatches, selectedId, onSelectCandidate }) 
         <mesh>
           <icosahedronGeometry args={[0.55, 3]} />
           <meshPhysicalMaterial
-            color="#6366F1"
+            color="#22D3EE"
             roughness={0.15}
             metalness={0.1}
             clearcoat={1}
@@ -176,7 +176,7 @@ function RadarScene({ currentUser, topMatches, selectedId, onSelectCandidate }) 
       {/* Laser synergy particle */}
       <mesh ref={pulseRef}>
         <sphereGeometry args={[0.09, 16, 16]} />
-        <meshBasicMaterial color="#818CF8" toneMapped={false} />
+        <meshBasicMaterial color="#67E8F9" toneMapped={false} />
       </mesh>
     </group>
   );
