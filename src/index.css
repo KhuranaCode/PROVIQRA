@@ -953,3 +953,31 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 }
 
 
+
+/* Discover filter toolbar: compact responsive layout */
+.discover-filter-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.discover-filter-search {
+  flex: 1;
+  min-width: 220px;
+}
+.discover-filter-select {
+  width: auto;
+  min-width: 150px;
+}
+@media (max-width: 640px) {
+  .discover-filter-card {
+    padding: 12px !important;
+    gap: 10px !important;
+  }
+  .discover-filter-search {
+    min-width: 100%;
+  }
+  .discover-filter-select {
+    flex: 1 1 calc(50% - 5px);
+    min-width: 0;
+  }
+}
