@@ -54,7 +54,7 @@ export default function ProfileScreen({ currentUser, allUsers, onUpdateProfile, 
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '850px', margin: '0 auto', width: '100%' }}>
       {/* Persona Switcher Quick Card */}
       <div style={{
-        background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(14, 165, 233, 0.1))',
+        background: 'linear-gradient(135deg, rgba(14, 116, 144, 0.1), rgba(6, 182, 212, 0.1))',
         border: '1.5px solid var(--accent-primary)',
         borderRadius: 'var(--radius-lg)',
         padding: '16px 20px',
