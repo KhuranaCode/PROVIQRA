@@ -67,7 +67,7 @@ export default function MessagesScreen({
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', height: 'calc(100vh - 180px)', minHeight: '520px' }}>
+    <div className="messages-layout" style={{ display: 'flex', flexDirection: 'column', gap: '16px', height: 'calc(100vh - 180px)', minHeight: '520px' }}>
       {/* Subtab Toggle Bar */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border)', paddingBottom: '10px' }}>
         <div style={{ display: 'flex', gap: '8px' }}>
@@ -284,7 +284,7 @@ export default function MessagesScreen({
           {activeConv && activePartner ? (
             <div className={`chat-main-pane ${!showMobileChatPane ? 'mobile-hidden' : ''}`}>
               {/* Chat Header */}
-              <div style={{ padding: '14px 18px', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--bg-surface-elevated)' }}>
+              <div className="chat-header" style={{ padding: '14px 18px', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--bg-surface-elevated)' }}>
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                   <button
                     type="button"
