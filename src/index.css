@@ -873,6 +873,13 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
     height: calc(100dvh - 430px) !important;
     min-height: 380px !important;
   }
+  .messages-layout .chat-container-split {
+    min-height: 0;
+  }
+  .messages-layout .chat-main-pane,
+  .messages-layout .chat-main-pane > div {
+    min-height: 0;
+  }
   .chat-header {
     flex-wrap: wrap;
     row-gap: 8px;
