@@ -3,13 +3,13 @@ import { INITIAL_USERS } from '../core/storage.js';
 
 /** Clay palette shared by DOM and 3D. */
 export const PALETTE = {
-  paper: '#F8FAFC',
+  paper: '#F5F7F4',
   ink: '#0F172A',
-  accent: '#6366F1',
-  lilac: '#818CF8',
+  accent: '#22D3EE',
+  lilac: '#67E8F9',
   peach: '#F472B6',
   mint: '#10B981',
-  sky: '#38BDF8',
+  sky: '#06B6D4',
   butter: '#FBBF24',
   rose: '#FB7185',
 };
