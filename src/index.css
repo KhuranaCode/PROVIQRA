@@ -3,24 +3,24 @@
   --font-mono: 'JetBrains Mono', monospace;
 
   /* Theme tokens - Light Mode defaults */
-  --bg-main: #F8FAFC;
+  --bg-main: #F5F7F4;
   --bg-surface: #FFFFFF;
-  --bg-surface-elevated: #F1F5F9;
+  --bg-surface-elevated: #EBF0EC;
   --bg-input: #FFFFFF;
-  --bg-hover: #F1F5F9;
+  --bg-hover: #EBF0EC;
   --border: #E2E8F0;
   --border-strong: #CBD5E1;
-  --border-focus: #4F46E5;
+  --border-focus: #0E7490;
 
   --text-primary: #0F172A;
   --text-secondary: #334155;
   --text-muted: #64748B;
   --text-inverse: #FFFFFF;
 
-  --accent-primary: #4F46E5;
-  --accent-primary-hover: #4338CA;
-  --accent-secondary: #0EA5E9;
-  --accent-soft: #EEF2FF;
+  --accent-primary: #0E7490;
+  --accent-primary-hover: #155E75;
+  --accent-secondary: #06B6D4;
+  --accent-soft: #E6F7FA;
   --accent-text: #FFFFFF;
 
   --badge-match-bg: #ECFDF5;
@@ -44,32 +44,32 @@
   --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.1), 0 4px 6px -4px rgba(15, 23, 42, 0.08);
 
   --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
-  --radius-xl: 20px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
   --radius-full: 9999px;
 }
 
 [data-theme="dark"] {
-  --bg-main: #0B0F17;
-  --bg-surface: #121A2A;
-  --bg-surface-elevated: #1A243B;
-  --bg-input: #162035;
-  --bg-hover: #202D4A;
-  --border: #243452;
-  --border-strong: #364B74;
-  --border-focus: #6366F1;
+  --bg-main: #0A1015;
+  --bg-surface: #101B24;
+  --bg-surface-elevated: #1A2733;
+  --bg-input: #14222E;
+  --bg-hover: #1F2E3D;
+  --border: #22364A;
+  --border-strong: #32506B;
+  --border-focus: #22D3EE;
 
   --text-primary: #FFFFFF;
   --text-secondary: #CBD5E1;
   --text-muted: #94A3B8;
   --text-inverse: #0F172A;
 
-  --accent-primary: #6366F1;
-  --accent-primary-hover: #4F46E5;
-  --accent-secondary: #38BDF8;
-  --accent-soft: rgba(99, 102, 241, 0.15);
-  --accent-text: #FFFFFF;
+  --accent-primary: #22D3EE;
+  --accent-primary-hover: #67E8F9;
+  --accent-secondary: #67E8F9;
+  --accent-soft: rgba(34, 211, 238, 0.14);
+  --accent-text: #062A33;
 
   --badge-match-bg: #064E3B;
   --badge-match-text: #6EE7B7;
@@ -102,8 +102,8 @@ body {
   font-family: var(--font-sans);
   background-color: var(--bg-main);
   background-image: 
-    radial-gradient(1000px 700px at 85% -10%, rgba(99, 102, 241, 0.07) 0%, transparent 60%),
-    radial-gradient(800px 500px at -10% 45%, rgba(14, 165, 233, 0.05) 0%, transparent 60%);
+    radial-gradient(1000px 700px at 85% -10%, rgba(14, 116, 144, 0.07) 0%, transparent 60%),
+    radial-gradient(800px 500px at -10% 45%, rgba(6, 182, 212, 0.05) 0%, transparent 60%);
   background-attachment: fixed;
   color: var(--text-primary);
   min-height: 100vh;
@@ -115,8 +115,8 @@ body {
 
 [data-theme="dark"] body {
   background-image: 
-    radial-gradient(1000px 700px at 85% -10%, rgba(99, 102, 241, 0.14) 0%, transparent 60%),
-    radial-gradient(800px 500px at -10% 45%, rgba(14, 165, 233, 0.08) 0%, transparent 60%);
+    radial-gradient(1000px 700px at 85% -10%, rgba(14, 116, 144, 0.14) 0%, transparent 60%),
+    radial-gradient(800px 500px at -10% 45%, rgba(6, 182, 212, 0.08) 0%, transparent 60%);
 }
 
 /* App Layout Wrapper */
@@ -151,7 +151,7 @@ body {
 
 [data-theme="dark"] .top-header {
   background: rgba(18, 26, 42, 0.8);
-  border-color: rgba(99, 102, 241, 0.22);
+  border-color: rgba(14, 116, 144, 0.22);
   box-shadow: 0 12px 36px -10px rgba(0, 0, 0, 0.5);
 }
 
@@ -165,7 +165,7 @@ body {
 
 .logo-badge {
   position: relative;
-  background: linear-gradient(135deg, #6366F1 0%, #4F46E5 60%, #0EA5E9 100%);
+  background: linear-gradient(135deg, #22D3EE 0%, #0E7490 60%, #06B6D4 100%);
   color: #FFFFFF;
   font-weight: 800;
   font-size: 1.15rem;
@@ -176,7 +176,7 @@ body {
   align-items: center;
   justify-content: center;
   letter-spacing: -0.5px;
-  box-shadow: 0 6px 18px -4px rgba(79, 70, 229, 0.45);
+  box-shadow: 0 6px 18px -4px rgba(21, 94, 117, 0.45);
   overflow: hidden;
 }
 
@@ -220,8 +220,8 @@ body {
   gap: 6px;
   padding: 6px 14px;
   border-radius: 999px;
-  background: rgba(99, 102, 241, 0.08);
-  border: 1px solid rgba(99, 102, 241, 0.25);
+  background: rgba(14, 116, 144, 0.08);
+  border: 1px solid rgba(14, 116, 144, 0.25);
   color: var(--text-primary);
   font-size: 0.82rem;
   font-weight: 700;
@@ -230,7 +230,7 @@ body {
 }
 
 .btn-3d-link:hover {
-  background: rgba(99, 102, 241, 0.15);
+  background: rgba(14, 116, 144, 0.15);
   border-color: var(--accent-primary);
   transform: translateY(-1px);
 }
@@ -281,8 +281,8 @@ body {
 
 .theme-toggle-indicator.is-dark {
   transform: translateX(26px);
-  background: #6366F1;
-  box-shadow: 0 2px 10px rgba(99, 102, 241, 0.55);
+  background: #0E7490;
+  box-shadow: 0 2px 10px rgba(14, 116, 144, 0.55);
 }
 
 .theme-toggle-indicator.is-light {
@@ -460,7 +460,7 @@ body {
 
 [data-theme="dark"] .bottom-nav-inner {
   background: rgba(18, 26, 42, 0.86);
-  border-color: rgba(99, 102, 241, 0.26);
+  border-color: rgba(34, 211, 238, 0.26);
   box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.65);
 }
 
@@ -779,7 +779,7 @@ body {
 .toast-info .toast-icon {
   background: var(--accent-soft);
   color: var(--accent-primary);
-  border: 1px solid rgba(99, 102, 241, 0.3);
+  border: 1px solid rgba(14, 116, 144, 0.3);
 }
 
 .toast-message {
@@ -867,19 +867,24 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 }
 
 
-/* Mobile messages layout: keep the whole chat pane (incl. composer) above the fixed bottom nav */
+/* Messages layout: fill the available height between header and nav (responsive, all screens) */
+.main-content--fill {
+  display: flex;
+  flex-direction: column;
+}
+.main-content--fill > .messages-layout {
+  flex: 1;
+  min-height: 420px;
+  height: auto !important;
+}
+.messages-layout .chat-container-split {
+  min-height: 0;
+}
+.messages-layout .chat-main-pane,
+.messages-layout .chat-main-pane > div {
+  min-height: 0;
+}
 @media (max-width: 768px) {
-  .messages-layout {
-    height: calc(100dvh - 430px) !important;
-    min-height: 380px !important;
-  }
-  .messages-layout .chat-container-split {
-    min-height: 0;
-  }
-  .messages-layout .chat-main-pane,
-  .messages-layout .chat-main-pane > div {
-    min-height: 0;
-  }
   .chat-header {
     flex-wrap: wrap;
     row-gap: 8px;
