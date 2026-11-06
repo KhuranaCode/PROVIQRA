@@ -233,7 +233,7 @@ export default function HomeScreen({
       {/* 3D Tilt Match Cards Grid */}
       {filteredMatches.length === 0 ? (
         <div className="empty-state-box" style={{ margin: '20px 0' }}>
-          <div className="empty-state-icon">🔍</div>
+          <div className="empty-state-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
           <h3 className="empty-state-title">No Profiles Match "{selectedFilter}"</h3>
           <p className="empty-state-desc">
             We couldn't find active peers matching the selected filter category with your current profile intent.
@@ -342,7 +342,7 @@ export default function HomeScreen({
                   }}
                 >
                   <span style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--accent-primary)' }}>
-                    💰 {opp.compensation}
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ verticalAlign: '-2px', marginRight: '4px' }}><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>{opp.compensation}
                   </span>
                   <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
                     {opp.commitment}
