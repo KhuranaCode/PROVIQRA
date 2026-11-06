@@ -336,7 +336,7 @@ export default function App() {
       </header>
 
       {/* Main Tab Screen Display */}
-      <main className="main-content">
+      <main className={`main-content ${activeTab === 'messages' ? 'main-content--fill' : ''}`}>
         {activeTab === 'home' && (
           <HomeScreen 
             currentUser={currentUser}
