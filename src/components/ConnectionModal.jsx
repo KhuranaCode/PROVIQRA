@@ -84,7 +84,7 @@ export default function ConnectionModal({ candidate, onClose, onSend }) {
             </div>
 
             <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', background: 'var(--bg-hover)', padding: '8px 12px', borderRadius: 'var(--radius-md)' }}>
-              🔒 <strong>Privacy Rule:</strong> Direct chat is only unlocked once {candidate.name} mutually accepts your request.
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ verticalAlign: '-2px', marginRight: '4px' }}><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><strong>Privacy Rule:</strong> Direct chat is only unlocked once {candidate.name} mutually accepts your request.
             </div>
           </div>
 
