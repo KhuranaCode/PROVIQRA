@@ -866,6 +866,24 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   flex-shrink: 0;
 }
 
+
+/* Mobile messages layout: keep the whole chat pane (incl. composer) above the fixed bottom nav */
+@media (max-width: 768px) {
+  .messages-layout {
+    height: calc(100dvh - 430px) !important;
+    min-height: 380px !important;
+  }
+  .chat-header {
+    flex-wrap: wrap;
+    row-gap: 8px;
+    padding: 10px 12px !important;
+  }
+  .chat-header .btn {
+    font-size: 0.72rem !important;
+    padding: 5px 10px !important;
+  }
+}
+
 .chat-main-pane {
   flex: 1;
   display: flex;
