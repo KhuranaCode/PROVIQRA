@@ -103,9 +103,9 @@ export default function DiscoverScreen({
       </div>
 
       {/* Filter Toolbar */}
-      <div className="card" style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
-        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-          <div style={{ flex: 1, minWidth: '220px' }}>
+      <div className="card discover-filter-card" style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
+        <div className="discover-filter-row">
+          <div className="discover-filter-search">
             <input 
               type="text"
               className="form-input"
@@ -118,8 +118,7 @@ export default function DiscoverScreen({
           {activeView === 'people' && (
             <>
               <select 
-                className="form-select"
-                style={{ width: 'auto', minWidth: '150px' }}
+                className="form-select discover-filter-select"
                 value={selectedRole}
                 onChange={(e) => setSelectedRole(e.target.value)}
               >
@@ -130,8 +129,7 @@ export default function DiscoverScreen({
               </select>
 
               <select 
-                className="form-select"
-                style={{ width: 'auto', minWidth: '150px' }}
+                className="form-select discover-filter-select"
                 value={selectedCommitment}
                 onChange={(e) => setSelectedCommitment(e.target.value)}
               >
@@ -148,7 +146,8 @@ export default function DiscoverScreen({
                 style={{ fontSize: '0.82rem' }}
                 onClick={() => setRemoteOnly(!remoteOnly)}
               >
-                🌍 Remote Only
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ flexShrink: 0 }}><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                Remote Only
               </button>
             </>
           )}
@@ -159,7 +158,7 @@ export default function DiscoverScreen({
       {activeView === 'people' ? (
         filteredUsers.length === 0 ? (
           <div className="empty-state-box" style={{ margin: '20px 0' }}>
-            <div className="empty-state-icon">👥</div>
+            <div className="empty-state-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
             <h3 className="empty-state-title">No Profiles Match Your Filters</h3>
             <p className="empty-state-desc">
               We couldn't find professionals matching "{searchTerm || selectedRole}". Try clearing your search query or role filter.
@@ -248,7 +247,7 @@ export default function DiscoverScreen({
         /* Opportunities View */
         filteredOpps.length === 0 ? (
           <div className="empty-state-box" style={{ margin: '20px 0' }}>
-            <div className="empty-state-icon">💼</div>
+            <div className="empty-state-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
             <h3 className="empty-state-title">No Opportunities Found</h3>
             <p className="empty-state-desc">
               No active listings match your search keyword "{searchTerm}".
