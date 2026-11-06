@@ -867,14 +867,20 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 }
 
 
-/* Messages layout: fill the available height between header and nav (responsive, all screens) */
+/* Messages layout: viewport-locked chat app shell - page does not scroll, chat pane fills
+   the space between header and nav and the message list scrolls internally */
+.app-container:has(> .main-content--fill) {
+  height: 100dvh;
+  overflow: hidden;
+}
 .main-content--fill {
   display: flex;
   flex-direction: column;
+  min-height: 0;
 }
 .main-content--fill > .messages-layout {
   flex: 1;
-  min-height: 420px;
+  min-height: 0;
   height: auto !important;
 }
 .messages-layout .chat-container-split {
