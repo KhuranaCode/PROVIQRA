@@ -67,7 +67,7 @@ export default function MessagesScreen({
   };
 
   return (
-    <div className="messages-layout" style={{ display: 'flex', flexDirection: 'column', gap: '16px', height: 'calc(100vh - 180px)', minHeight: '520px' }}>
+    <div className="messages-layout" style={{ display: 'flex', flexDirection: 'column', gap: '16px', minHeight: '420px' }}>
       {/* Subtab Toggle Bar */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border)', paddingBottom: '10px' }}>
         <div style={{ display: 'flex', gap: '8px' }}>
