@@ -353,7 +353,7 @@ export default function MessagesScreen({
                         fontSize: '0.88rem',
                         lineHeight: '1.4',
                         backgroundColor: isMe ? 'var(--accent-primary)' : 'var(--bg-surface-elevated)',
-                        color: isMe ? '#FFFFFF' : 'var(--text-primary)',
+                        color: isMe ? 'var(--accent-text)' : 'var(--text-primary)',
                         border: isMe ? 'none' : '1px solid var(--border)'
                       }}>
                         {msg.text}
