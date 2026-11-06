@@ -30,7 +30,7 @@ export default function AnalyticsModal({ outcomes = [], connections = [], onClos
         <div className="modal-body">
           {/* North Star Highlight Card */}
           <div style={{
-            background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.12), rgba(14, 165, 233, 0.12))',
+            background: 'linear-gradient(135deg, rgba(14, 116, 144, 0.12), rgba(6, 182, 212, 0.12))',
             border: '1.5px solid var(--accent-primary)',
             borderRadius: 'var(--radius-lg)',
             padding: '20px',
