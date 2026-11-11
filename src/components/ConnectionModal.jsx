@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , useRef } from 'react';
 import { CONNECTION_PURPOSES } from '../core/types.js';
 
 export default function ConnectionModal({ candidate, onClose, onSend }) {
@@ -23,6 +23,14 @@ export default function ConnectionModal({ candidate, onClose, onSend }) {
     });
   };
 
+  const dialogRef = useRef(null);
+
+  useEffect(() => {
+    const previouslyFocused = document.activeElement;
+    dialogRef.current?.focus();
+    return () => previouslyFocused?.focus?.();
+  }, []);
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') onClose();
@@ -32,7 +40,7 @@ export default function ConnectionModal({ candidate, onClose, onSend }) {
   }, [onClose]);
 
   return (
-    <div className="modal-overlay" onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="modal-conn-title">
+    <div ref={dialogRef} tabIndex={-1} style={{ outline: 'none' }} className="modal-overlay" onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="modal-conn-title">
       <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h3 className="modal-title" id="modal-conn-title">Connect with {candidate.name}</h3>
