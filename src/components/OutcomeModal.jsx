@@ -1,9 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , useRef } from 'react';
 import { OUTCOME_TYPES } from '../core/types.js';
 
 export default function OutcomeModal({ partner, onClose, onLogOutcome }) {
   const [selectedType, setSelectedType] = useState(OUTCOME_TYPES[0].id);
   const [notes, setNotes] = useState('');
+
+  const dialogRef = useRef(null);
+
+  useEffect(() => {
+    const previouslyFocused = document.activeElement;
+    dialogRef.current?.focus();
+    return () => previouslyFocused?.focus?.();
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -28,7 +36,7 @@ export default function OutcomeModal({ partner, onClose, onLogOutcome }) {
   };
 
   return (
-    <div className="modal-overlay" onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="modal-outcome-title">
+    <div ref={dialogRef} tabIndex={-1} style={{ outline: 'none' }} className="modal-overlay" onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="modal-outcome-title">
       <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h3 className="modal-title" id="modal-outcome-title">Record Professional Outcome</h3>
