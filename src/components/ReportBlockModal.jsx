@@ -1,8 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , useRef } from 'react';
 
 export default function ReportBlockModal({ user, mode = 'report', onClose, onSubmit }) {
   const [reason, setReason] = useState('Inappropriate behavior or spam');
   const [details, setDetails] = useState('');
+
+  const dialogRef = useRef(null);
+
+  useEffect(() => {
+    const previouslyFocused = document.activeElement;
+    dialogRef.current?.focus();
+    return () => previouslyFocused?.focus?.();
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -23,7 +31,7 @@ export default function ReportBlockModal({ user, mode = 'report', onClose, onSub
   };
 
   return (
-    <div className="modal-overlay" onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="modal-report-title">
+    <div ref={dialogRef} tabIndex={-1} style={{ outline: 'none' }} className="modal-overlay" onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="modal-report-title">
       <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h3 className="modal-title" id="modal-report-title" style={{ color: mode === 'block' ? '#EF4444' : 'var(--text-primary)' }}>
