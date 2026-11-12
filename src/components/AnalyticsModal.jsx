@@ -1,10 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect , useRef } from 'react';
 
 export default function AnalyticsModal({ outcomes = [], connections = [], onClose }) {
   const totalOutcomes = outcomes.length;
   const acceptedConnections = connections.filter(c => c.status === 'accepted').length;
   const pendingConnections = connections.filter(c => c.status === 'pending').length;
   const matchViews = Math.max(connections.length * 4 + acceptedConnections * 2 + 32, 32);
+
+  const dialogRef = useRef(null);
+
+  useEffect(() => {
+    const previouslyFocused = document.activeElement;
+    dialogRef.current?.focus();
+    return () => previouslyFocused?.focus?.();
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -15,7 +23,7 @@ export default function AnalyticsModal({ outcomes = [], connections = [], onClos
   }, [onClose]);
 
   return (
-    <div className="modal-overlay" onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="modal-analytics-title">
+    <div ref={dialogRef} tabIndex={-1} style={{ outline: 'none' }} className="modal-overlay" onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="modal-analytics-title">
       <div className="modal-dialog" style={{ maxWidth: '640px' }} onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <div>
