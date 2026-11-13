@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { loadAppState, saveAppState } from './core/storage.js';
 import { getStoredTheme, setAppTheme, THEME_CHANGE_EVENT } from './core/theme.js';
 import HomeScreen from './features/home/HomeScreen.jsx';
@@ -35,14 +35,20 @@ export default function App() {
   const [inspectedProfile, setInspectedProfile] = useState(null);
   const [selectedConversationId, setSelectedConversationId] = useState(null);
 
-  // Keyboard accessibility: Escape closes profile inspection
+  // Keyboard accessibility: Escape closes profile inspection, focus moves into the dialog and restores on close
+  const inspectDialogRef = useRef(null);
   useEffect(() => {
     if (!inspectedProfile) return;
+    const previouslyFocused = document.activeElement;
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') setInspectedProfile(null);
     };
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    inspectDialogRef.current?.focus();
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      previouslyFocused?.focus?.();
+    };
   }, [inspectedProfile]);
 
   // Sync state to localStorage whenever it changes
@@ -497,6 +503,9 @@ export default function App() {
       {/* Inspect Profile Details Modal */}
       {inspectedProfile && (
         <div 
+          ref={inspectDialogRef}
+          tabIndex={-1}
+          style={{ outline: 'none' }}
           className="modal-overlay" 
           onClick={() => setInspectedProfile(null)}
           role="dialog"
