@@ -42,6 +42,27 @@ export default function App() {
     const previouslyFocused = document.activeElement;
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') setInspectedProfile(null);
+      if (e.key === 'Tab' && inspectDialogRef.current) {
+        const focusable = inspectDialogRef.current.querySelectorAll(
+          'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) {
+          e.preventDefault();
+          return;
+        }
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        const active = document.activeElement;
+        if (e.shiftKey) {
+          if (active === first || !inspectDialogRef.current.contains(active)) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else if (active === last || !inspectDialogRef.current.contains(active)) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     };
     window.addEventListener('keydown', handleKeyDown);
     inspectDialogRef.current?.focus();
