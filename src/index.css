@@ -981,3 +981,15 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
     min-width: 0;
   }
 }
+
+/* Respect user reduced-motion preference: kill looping animations, transitions, smooth scroll */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
