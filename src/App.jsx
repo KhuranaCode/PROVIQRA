@@ -261,6 +261,17 @@ export default function App() {
 
   return (
     <div className="app-container">
+      <a
+        href="#main-content"
+        className="skip-link"
+        onClick={(e) => {
+          e.preventDefault();
+          const m = document.getElementById('main-content');
+          if (m) { m.focus(); m.scrollIntoView(); }
+        }}
+      >
+        Skip to main content
+      </a>
       {/* Top Header */}
       <header className="top-header">
         <div 
@@ -363,7 +374,7 @@ export default function App() {
       </header>
 
       {/* Main Tab Screen Display */}
-      <main className={`main-content ${activeTab === 'messages' ? 'main-content--fill' : ''}`}>
+      <main id="main-content" tabIndex={-1} className={`main-content ${activeTab === 'messages' ? 'main-content--fill' : ''}`}>
         {activeTab === 'home' && (
           <HomeScreen 
             currentUser={currentUser}
