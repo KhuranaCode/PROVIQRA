@@ -124,8 +124,8 @@ export default function ProfileScreen({ currentUser, allUsers, onUpdateProfile, 
         {isEditingIdentity ? (
           <form onSubmit={handleSaveIdentity} style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '10px' }}>
             <div className="form-group">
-              <label className="form-label">Professional Headline</label>
-              <input 
+              <label className="form-label" htmlFor="profile-headline">Professional Headline</label>
+              <input id="profile-headline" 
                 type="text" 
                 className="form-input" 
                 value={headline} 
@@ -134,8 +134,8 @@ export default function ProfileScreen({ currentUser, allUsers, onUpdateProfile, 
               />
             </div>
             <div className="form-group">
-              <label className="form-label">Location</label>
-              <input 
+              <label className="form-label" htmlFor="profile-location">Location</label>
+              <input id="profile-location" 
                 type="text" 
                 className="form-input" 
                 value={location} 
@@ -144,8 +144,8 @@ export default function ProfileScreen({ currentUser, allUsers, onUpdateProfile, 
               />
             </div>
             <div className="form-group">
-              <label className="form-label">Years of Experience</label>
-              <input 
+              <label className="form-label" htmlFor="profile-experience">Years of Experience</label>
+              <input id="profile-experience" 
                 type="number" 
                 className="form-input" 
                 value={experienceYears} 
@@ -154,8 +154,8 @@ export default function ProfileScreen({ currentUser, allUsers, onUpdateProfile, 
               />
             </div>
             <div className="form-group">
-              <label className="form-label">Bio</label>
-              <textarea 
+              <label className="form-label" htmlFor="profile-bio">Bio</label>
+              <textarea id="profile-bio" 
                 className="form-textarea" 
                 rows="3" 
                 value={bio} 
@@ -256,8 +256,8 @@ export default function ProfileScreen({ currentUser, allUsers, onUpdateProfile, 
         {isEditingIntent ? (
           <form onSubmit={handleSaveIntent} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <div className="form-group">
-              <label className="form-label">Current Intent Type</label>
-              <select className="form-select" value={intentType} onChange={(e) => setIntentType(e.target.value)}>
+              <label className="form-label" htmlFor="profile-intent-type">Current Intent Type</label>
+              <select id="profile-intent-type" className="form-select" value={intentType} onChange={(e) => setIntentType(e.target.value)}>
                 {Object.values(INTENT_TYPES).map(t => (
                   <option key={t} value={t}>{t}</option>
                 ))}
@@ -265,8 +265,8 @@ export default function ProfileScreen({ currentUser, allUsers, onUpdateProfile, 
             </div>
 
             <div className="form-group">
-              <label className="form-label">Role Needed</label>
-              <input 
+              <label className="form-label" htmlFor="profile-role-needed">Role Needed</label>
+              <input id="profile-role-needed" 
                 type="text" 
                 className="form-input" 
                 value={roleNeeded} 
@@ -278,8 +278,8 @@ export default function ProfileScreen({ currentUser, allUsers, onUpdateProfile, 
 
             <div className="grid-2">
               <div className="form-group">
-                <label className="form-label">Industry</label>
-                <input 
+                <label className="form-label" htmlFor="profile-industry">Industry</label>
+                <input id="profile-industry" 
                   type="text" 
                   className="form-input" 
                   value={industry} 
@@ -290,8 +290,8 @@ export default function ProfileScreen({ currentUser, allUsers, onUpdateProfile, 
               </div>
 
               <div className="form-group">
-                <label className="form-label">Commitment</label>
-                <select className="form-select" value={commitment} onChange={(e) => setCommitment(e.target.value)}>
+                <label className="form-label" htmlFor="profile-commitment">Commitment</label>
+                <select id="profile-commitment" className="form-select" value={commitment} onChange={(e) => setCommitment(e.target.value)}>
                   {COMMITMENT_OPTIONS.map(c => (
                     <option key={c} value={c}>{c}</option>
                   ))}
@@ -301,8 +301,8 @@ export default function ProfileScreen({ currentUser, allUsers, onUpdateProfile, 
 
             <div className="grid-2">
               <div className="form-group">
-                <label className="form-label">Remote Preference</label>
-                <select className="form-select" value={remote} onChange={(e) => setRemote(e.target.value)}>
+                <label className="form-label" htmlFor="profile-remote">Remote Preference</label>
+                <select id="profile-remote" className="form-select" value={remote} onChange={(e) => setRemote(e.target.value)}>
                   {REMOTE_OPTIONS.map(r => (
                     <option key={r} value={r}>{r}</option>
                   ))}
@@ -310,8 +310,8 @@ export default function ProfileScreen({ currentUser, allUsers, onUpdateProfile, 
               </div>
 
               <div className="form-group">
-                <label className="form-label">Compensation / Equity Structure</label>
-                <input 
+                <label className="form-label" htmlFor="profile-compensation">Compensation / Equity Structure</label>
+                <input id="profile-compensation" 
                   type="text" 
                   className="form-input" 
                   value={compensation} 
@@ -322,8 +322,8 @@ export default function ProfileScreen({ currentUser, allUsers, onUpdateProfile, 
             </div>
 
             <div className="form-group">
-              <label className="form-label">Intent Description / Pitch</label>
-              <textarea 
+              <label className="form-label" htmlFor="profile-description">Intent Description / Pitch</label>
+              <textarea id="profile-description" 
                 className="form-textarea" 
                 rows="3" 
                 value={description} 
