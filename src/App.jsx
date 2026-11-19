@@ -437,6 +437,7 @@ export default function App() {
         <div className="bottom-nav-inner">
           <button 
             className={`nav-tab ${activeTab === 'home' ? 'active' : ''}`}
+            aria-current={activeTab === 'home' ? 'page' : undefined}
             onClick={() => setActiveTab('home')}
             id="dock-home"
           >
@@ -448,6 +449,7 @@ export default function App() {
 
           <button 
             className={`nav-tab ${activeTab === 'discover' ? 'active' : ''}`}
+            aria-current={activeTab === 'discover' ? 'page' : undefined}
             onClick={() => setActiveTab('discover')}
             id="dock-discover"
           >
@@ -459,6 +461,7 @@ export default function App() {
 
           <button 
             className={`nav-tab ${activeTab === 'ask' ? 'active' : ''}`}
+            aria-current={activeTab === 'ask' ? 'page' : undefined}
             onClick={() => setActiveTab('ask')}
             id="dock-ask"
           >
@@ -470,6 +473,7 @@ export default function App() {
 
           <button 
             className={`nav-tab ${activeTab === 'messages' ? 'active' : ''}`}
+            aria-current={activeTab === 'messages' ? 'page' : undefined}
             onClick={() => setActiveTab('messages')}
             id="dock-messages"
           >
@@ -484,6 +488,7 @@ export default function App() {
 
           <button 
             className={`nav-tab ${activeTab === 'profile' ? 'active' : ''}`}
+            aria-current={activeTab === 'profile' ? 'page' : undefined}
             onClick={() => setActiveTab('profile')}
             id="dock-profile"
           >
