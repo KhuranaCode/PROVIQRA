@@ -83,11 +83,11 @@ export default function ConnectionModal({ candidate, onClose, onSend }) {
             </div>
 
             <div className="form-group">
-              <label className="form-label">Purpose of Connection (Required)</label>
+              <label className="form-label" htmlFor="connect-purpose">Purpose of Connection (Required)</label>
               <div className="form-hint" style={{ marginBottom: '6px' }}>
                 Every request must specify clear professional intent to preserve network signal.
               </div>
-              <select 
+              <select id="connect-purpose" 
                 className="form-select"
                 value={purpose}
                 onChange={handlePurposeChange}
@@ -99,11 +99,11 @@ export default function ConnectionModal({ candidate, onClose, onSend }) {
             </div>
 
             <div className="form-group">
-              <label className="form-label">Contextual Message</label>
+              <label className="form-label" htmlFor="connect-message">Contextual Message</label>
               <div className="form-hint" style={{ marginBottom: '6px' }}>
                 Explain why your skills or intent complement each other.
               </div>
-              <textarea 
+              <textarea id="connect-message" 
                 className="form-textarea"
                 rows="4"
                 value={message}
