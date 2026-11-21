@@ -57,6 +57,7 @@ export default function AskScreen({ currentUser, allUsers, onConnect, onViewProf
           <textarea
             className="form-textarea"
             rows="3"
+            aria-label="Describe your need or request"
             placeholder="Type your need: e.g. Find me a Flutter developer in India who wants to join an early-stage fintech startup part-time..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
