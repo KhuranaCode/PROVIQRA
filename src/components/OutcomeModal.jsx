@@ -72,8 +72,8 @@ export default function OutcomeModal({ partner, onClose, onLogOutcome }) {
             </p>
 
             <div className="form-group">
-              <label className="form-label">What happened?</label>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '6px' }}>
+              <label className="form-label" id="outcome-type-label">What happened?</label>
+              <div role="radiogroup" aria-labelledby="outcome-type-label" style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '6px' }}>
                 {OUTCOME_TYPES.map((type) => (
                   <label 
                     key={type.id} 
@@ -107,8 +107,9 @@ export default function OutcomeModal({ partner, onClose, onLogOutcome }) {
             </div>
 
             <div className="form-group" style={{ marginTop: '14px' }}>
-              <label className="form-label">Brief Notes (Optional)</label>
-              <input 
+              <label className="form-label" htmlFor="outcome-notes">Brief Notes (Optional)</label>
+              <input
+                id="outcome-notes" 
                 type="text"
                 className="form-input"
                 placeholder="e.g. Scheduled demo call for Friday 3 PM"
