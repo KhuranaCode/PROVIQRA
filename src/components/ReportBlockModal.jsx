@@ -74,8 +74,8 @@ export default function ReportBlockModal({ user, mode = 'report', onClose, onSub
             )}
 
             <div className="form-group">
-              <label className="form-label">Reason</label>
-              <select className="form-select" value={reason} onChange={(e) => setReason(e.target.value)}>
+              <label className="form-label" htmlFor="report-reason">Reason</label>
+              <select id="report-reason" className="form-select" value={reason} onChange={(e) => setReason(e.target.value)}>
                 <option value="Inappropriate behavior or spam">Inappropriate behavior or spam</option>
                 <option value="Misleading profile or fake experience">Misleading profile or fake experience</option>
                 <option value="Aggressive sales pitching / unsolicited ads">Aggressive sales pitching / unsolicited ads</option>
@@ -84,8 +84,9 @@ export default function ReportBlockModal({ user, mode = 'report', onClose, onSub
             </div>
 
             <div className="form-group">
-              <label className="form-label">Additional Details</label>
-              <textarea 
+              <label className="form-label" htmlFor="report-details">Additional Details</label>
+              <textarea
+                id="report-details" 
                 className="form-textarea" 
                 rows="3" 
                 placeholder="Please describe what happened..."
