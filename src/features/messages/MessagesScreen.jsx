@@ -371,6 +371,7 @@ export default function MessagesScreen({
                 <input 
                   type="text"
                   className="form-input"
+                  aria-label={`Message ${activePartner.name}`}
                   placeholder={`Message ${activePartner.name}...`}
                   value={newMessageText}
                   onChange={(e) => setNewMessageText(e.target.value)}
