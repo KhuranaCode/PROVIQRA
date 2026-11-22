@@ -109,6 +109,7 @@ export default function DiscoverScreen({
             <input 
               type="text"
               className="form-input"
+              aria-label="Search by skill, role, company or name"
               placeholder="Search by skill, role, company or name (e.g. Flutter, Fintech, Investor)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -119,6 +120,7 @@ export default function DiscoverScreen({
             <>
               <select 
                 className="form-select discover-filter-select"
+                aria-label="Filter by role"
                 value={selectedRole}
                 onChange={(e) => setSelectedRole(e.target.value)}
               >
@@ -130,6 +132,7 @@ export default function DiscoverScreen({
 
               <select 
                 className="form-select discover-filter-select"
+                aria-label="Filter by commitment"
                 value={selectedCommitment}
                 onChange={(e) => setSelectedCommitment(e.target.value)}
               >
