@@ -181,9 +181,9 @@ export default function ProfileScreen({ currentUser, allUsers, onUpdateProfile, 
 
         {/* Skills List */}
         <div style={{ borderTop: '1px solid var(--border)', paddingTop: '14px' }}>
-          <h4 style={{ fontSize: '0.9rem', fontWeight: '700', marginBottom: '10px', color: 'var(--text-primary)' }}>
+          <h3 style={{ fontSize: '0.9rem', fontWeight: '700', marginBottom: '10px', color: 'var(--text-primary)' }}>
             Verified Skills & Proficiency
-          </h4>
+          </h3>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
             {(currentUser.skills || []).map((skill, idx) => (
               <span key={idx} className="badge badge-tag" style={{ padding: '6px 12px', fontSize: '0.8rem' }}>
@@ -195,9 +195,9 @@ export default function ProfileScreen({ currentUser, allUsers, onUpdateProfile, 
 
         {/* Proof of Work Showcase */}
         <div style={{ borderTop: '1px solid var(--border)', paddingTop: '14px' }}>
-          <h4 style={{ fontSize: '0.9rem', fontWeight: '700', marginBottom: '10px', color: 'var(--text-primary)' }}>
+          <h3 style={{ fontSize: '0.9rem', fontWeight: '700', marginBottom: '10px', color: 'var(--text-primary)' }}>
             Proof of Work (GitHub / Products / Research)
-          </h4>
+          </h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             {(currentUser.proofOfWork || []).map((item, idx) => (
               <div 
