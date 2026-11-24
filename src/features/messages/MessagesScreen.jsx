@@ -102,9 +102,9 @@ export default function MessagesScreen({
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', overflowY: 'auto' }}>
           {/* Incoming */}
           <div>
-            <h3 style={{ fontSize: '1.1rem', fontWeight: '800', marginBottom: '12px', color: 'var(--text-primary)' }}>
+            <h2 style={{ fontSize: '1.1rem', fontWeight: '800', marginBottom: '12px', color: 'var(--text-primary)' }}>
               Incoming Requests ({incomingRequests.length})
-            </h3>
+            </h2>
             {incomingRequests.length === 0 ? (
               <div className="card" style={{ padding: '24px', textAlign: 'center', color: 'var(--text-muted)' }}>
                 No pending incoming connection requests right now.
@@ -182,9 +182,9 @@ export default function MessagesScreen({
 
           {/* Outgoing */}
           <div>
-            <h3 style={{ fontSize: '1.1rem', fontWeight: '800', marginBottom: '12px', color: 'var(--text-primary)' }}>
+            <h2 style={{ fontSize: '1.1rem', fontWeight: '800', marginBottom: '12px', color: 'var(--text-primary)' }}>
               Sent Requests Pending Approval ({outgoingRequests.length})
-            </h3>
+            </h2>
             {outgoingRequests.length === 0 ? (
               <div className="card" style={{ padding: '20px', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.88rem' }}>
                 You have no pending outgoing requests. Browse Discover or Ask to connect!
