@@ -162,7 +162,7 @@ export default function DiscoverScreen({
         filteredUsers.length === 0 ? (
           <div className="empty-state-box" style={{ margin: '20px 0' }}>
             <div className="empty-state-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-            <h3 className="empty-state-title">No Profiles Match Your Filters</h3>
+            <h2 className="empty-state-title">No Profiles Match Your Filters</h2>
             <p className="empty-state-desc">
               We couldn't find professionals matching "{searchTerm || selectedRole}". Try clearing your search query or role filter.
             </p>
@@ -251,7 +251,7 @@ export default function DiscoverScreen({
         filteredOpps.length === 0 ? (
           <div className="empty-state-box" style={{ margin: '20px 0' }}>
             <div className="empty-state-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
-            <h3 className="empty-state-title">No Opportunities Found</h3>
+            <h2 className="empty-state-title">No Opportunities Found</h2>
             <p className="empty-state-desc">
               No active listings match your search keyword "{searchTerm}".
             </p>
@@ -273,9 +273,9 @@ export default function DiscoverScreen({
                 </div>
 
                 <div>
-                  <h3 style={{ fontSize: '1.05rem', fontWeight: '700', color: 'var(--text-primary)' }}>
+                  <h2 style={{ fontSize: '1.05rem', fontWeight: '700', color: 'var(--text-primary)' }}>
                     {opp.title}
-                  </h3>
+                  </h2>
                   <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '2px' }}>
                     {opp.organization} • {opp.location}
                   </div>
