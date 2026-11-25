@@ -21,7 +21,7 @@ export default function MatchCard({
           />
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <h3 style={{ fontSize: '1.05rem', fontWeight: '700', color: 'var(--text-primary)' }}>{candidate.name}</h3>
+              <h2 style={{ fontSize: '1.05rem', fontWeight: '700', color: 'var(--text-primary)' }}>{candidate.name}</h2>
               {candidate.verified && (
                 <span title="Verified Identity" style={{ color: 'var(--accent-primary)', fontSize: '0.9rem' }}>✓</span>
               )}
