@@ -191,6 +191,7 @@ export default function HomeScreen({
             type="button"
             className={`dash-filter-btn ${selectedFilter === 'all' ? 'is-active' : ''}`}
             onClick={() => setSelectedFilter('all')}
+            aria-pressed={selectedFilter === 'all'}
             id="filter-all"
           >
             All Matches ({allMatches.length})
@@ -199,6 +200,7 @@ export default function HomeScreen({
             type="button"
             className={`dash-filter-btn ${selectedFilter === 'high' ? 'is-active' : ''}`}
             onClick={() => setSelectedFilter('high')}
+            aria-pressed={selectedFilter === 'high'}
             id="filter-high"
           >
             High Fit (80%+)
@@ -207,6 +209,7 @@ export default function HomeScreen({
             type="button"
             className={`dash-filter-btn ${selectedFilter === 'cofounder' ? 'is-active' : ''}`}
             onClick={() => setSelectedFilter('cofounder')}
+            aria-pressed={selectedFilter === 'cofounder'}
             id="filter-cofounder"
           >
             Co-founders
@@ -215,6 +218,7 @@ export default function HomeScreen({
             type="button"
             className={`dash-filter-btn ${selectedFilter === 'tech' ? 'is-active' : ''}`}
             onClick={() => setSelectedFilter('tech')}
+            aria-pressed={selectedFilter === 'tech'}
             id="filter-tech"
           >
             Tech & Product
@@ -223,6 +227,7 @@ export default function HomeScreen({
             type="button"
             className={`dash-filter-btn ${selectedFilter === 'investor' ? 'is-active' : ''}`}
             onClick={() => setSelectedFilter('investor')}
+            aria-pressed={selectedFilter === 'investor'}
             id="filter-investor"
           >
             Investors
