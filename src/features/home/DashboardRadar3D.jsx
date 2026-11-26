@@ -224,6 +224,7 @@ function RadarFallback2D({ currentUser, topMatches, selectedId, onSelectCandidat
               transform: `translate(${x}px, ${y}px)`,
               cursor: 'pointer',
             }}
+            aria-pressed={selectedId === m.candidate.id}
             onClick={() => onSelectCandidate(m.candidate.id)}
           >
             <span className="dash3d-dot" style={{ backgroundColor: color }} />
@@ -237,6 +238,7 @@ function RadarFallback2D({ currentUser, topMatches, selectedId, onSelectCandidat
 }
 
 export default function DashboardRadar3D({ currentUser, topMatches, selectedId, onSelectCandidate }) {
+  const [a11yListFocused, setA11yListFocused] = useState(false);
   return (
     <div className="dash3d-container">
       <CanvasErrorBoundary
@@ -270,6 +272,31 @@ export default function DashboardRadar3D({ currentUser, topMatches, selectedId, 
       <div className="dash3d-hint">
         <span>✦ Interactive 3D Intent Radar — tap a node to inspect</span>
       </div>
+      {/* Keyboard / assistive-tech equivalent of the 3D radar nodes; revealed on focus */}
+      <ul
+        aria-label="Top matches"
+        onFocusCapture={() => setA11yListFocused(true)}
+        onBlurCapture={(e) => {
+          if (!e.currentTarget.contains(e.relatedTarget)) setA11yListFocused(false);
+        }}
+        style={a11yListFocused
+          ? { listStyle: 'none', display: 'flex', flexWrap: 'wrap', gap: '8px', padding: 0, margin: '10px 0 0' }
+          : { position: 'absolute', width: '1px', height: '1px', padding: 0, margin: '-1px', overflow: 'hidden', clip: 'rect(0, 0, 0, 0)', whiteSpace: 'nowrap', border: 0, listStyle: 'none' }}
+      >
+        {topMatches.slice(0, 5).map((m) => (
+          <li key={m.candidate.id}>
+            <button
+              type="button"
+              className={a11yListFocused ? 'btn btn-secondary' : undefined}
+              style={a11yListFocused ? { fontSize: '0.8rem' } : undefined}
+              aria-pressed={selectedId === m.candidate.id}
+              onClick={() => onSelectCandidate(m.candidate.id)}
+            >
+              {m.candidate.name}, {m.candidate.role}, {m.score}% match
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
