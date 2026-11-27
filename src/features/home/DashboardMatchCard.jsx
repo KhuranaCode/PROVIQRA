@@ -123,6 +123,7 @@ export default function DashboardMatchCard({
             <button
               type="button"
               className="dash-breakdown-toggle"
+              aria-expanded={showBreakdown}
               onClick={() => setShowBreakdown(!showBreakdown)}
             >
               <span>{showBreakdown ? 'Hide Algorithm Scoring' : 'View 100-pt Breakdown'}</span>
