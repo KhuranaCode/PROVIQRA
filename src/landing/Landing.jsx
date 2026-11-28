@@ -57,6 +57,11 @@ function CountUp({ value, duration = 900 }) {
   const [shown, setShown] = useState(value);
   const from = useRef(value);
   useEffect(() => {
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setShown(value);
+      from.current = value;
+      return undefined;
+    }
     const start = performance.now();
     const a = from.current;
     let raf;
